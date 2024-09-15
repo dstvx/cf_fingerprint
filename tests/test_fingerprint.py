@@ -1,6 +1,6 @@
 import unittest
 from pathlib import Path
-from cf_fingerprint import get_fingerprint
+from cf_fingerprint.fingerprint import get_fingerprint
 
 class TestFingerprint(unittest.TestCase):
     def test_small_file(self):
