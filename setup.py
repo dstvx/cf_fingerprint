@@ -1,10 +1,17 @@
 from setuptools import setup, find_packages
+from pathlib import Path
+
+# Get the directory where setup.py is located
+base_dir = Path(__file__).parent.resolve()
+
+# Read the contents of README.md
+long_description = (base_dir / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='cf_fingerprint',
     version='1.0.0',
     description='A Python implementation for generating a 32-bit fingerprint of files.',
-    long_description=open('README.md').read(),
+    long_description=long_description,
     long_description_content_type='text/markdown',
     author='dstvx',
     author_email='thomas.brionesm@gmail.com',
