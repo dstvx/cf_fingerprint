@@ -6,14 +6,9 @@ from numpy import (
     memmap
 )
 
-from pathlib import (
-    Path
-)
+from pathlib import Path
 
-from typing import (
-    Union
-)
-
+from typing import Union
 
 def get_fingerprint(file_path: Union[str, Path]) -> int:
     '''
@@ -33,6 +28,11 @@ def get_fingerprint(file_path: Union[str, Path]) -> int:
     seterr(all='ignore')  # Ignore NumPy warnings for potential overflows
 
     try:
+        file_path = Path(file_path)  # Ensure file_path is a Path object
+        if not file_path.is_file():
+            print(f'Error: File "{file_path}" not found.')
+            return None
+
         buffer = memmap(file_path, dtype=uint8, mode='r')
         buffer = buffer[(buffer != 9) & (buffer != 10) & (buffer != 13) & (buffer != 32)]
 
@@ -70,10 +70,6 @@ def get_fingerprint(file_path: Union[str, Path]) -> int:
 
         return int(fingerprint)
 
-    except FileNotFoundError:
-        print(f'Error: File "{file_path}" not found.')
-        return None
-    except (TypeError, OSError) as e:
-        print(f'Error: Invalid input "{file_path}".')
-        print(f'Details: {str(e)}')
+    except Exception as e:
+        print(f'Error processing file "{file_path}": {str(e)}')
         return None

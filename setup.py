@@ -17,12 +17,13 @@ setup(
     author_email='thomas.brionesm@gmail.com',
     url='https://github.com/dstvx/cf_fingerprint',
     license='MIT',
-    packages=find_packages(),  # Automatically find and include the cf_fingerprint package
-    install_requires=['numpy'],  # Dependencies
+    packages=find_packages(exclude=['tests']),
+    install_requires=['numpy'],
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    python_requires='>=3.12',  # Minimum Python version requirement
+    python_requires='>=3.12',
+    test_suite='tests',
 )
