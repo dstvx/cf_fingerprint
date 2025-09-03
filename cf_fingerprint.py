@@ -6,8 +6,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from numpy import fromfile, uint32, uint8
+from numpy import fromfile, uint32, uint8, seterr
 
+seterr('ignore')
 
 def get_fingerprint(file_path: str | Path) -> int:
     """
@@ -78,3 +79,4 @@ def get_fingerprint(file_path: str | Path) -> int:
     fingerprint ^= fingerprint >> 15
 
     return int(fingerprint)
+
